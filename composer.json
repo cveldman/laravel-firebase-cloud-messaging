@@ -1,0 +1,38 @@
+{
+    "name": "cveldman/laravel-firebase-cloud-messaging",
+    "description": "description",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Corné Veldman",
+            "email": "cveldman@hotmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "guzzlehttp/guzzle": "^7.2",
+        "google/apiclient": "2.15.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Veldman\\FirebaseCloudMessaging\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Veldman\\FirebaseCloudMessaging\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "pre-autoload-dump": "Google\\Task\\Composer::cleanup"
+    },
+    "extra": {
+        "google/apiclient-services": [
+            "FirebaseCloudMessaging"
+        ]
+    }
+}
