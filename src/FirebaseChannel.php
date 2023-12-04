@@ -17,7 +17,7 @@ class FirebaseChannel
         $data = $this->getData($notifiable, $notification);
 
         $client = new Client();
-        $client->setAuthConfig('./google.json');
+        $client->setAuthConfig(env('FIREBASE_CONFIG', './storage/google.json'));
         $client->addScope(FirebaseCloudMessaging::FIREBASE_MESSAGING);
         $service = new FirebaseCloudMessaging($client);
 
@@ -29,7 +29,7 @@ class FirebaseChannel
         ];
         $request = new SendMessageRequest($data);
 
-        $json = file_get_contents('./google.json');
+        $json = file_get_contents(env('FIREBASE_CONFIG', './storage/google.json'));
         $config = json_decode($json);
 
         $service->projects_messages->send('projects/' . $config->project_id, $request);
