@@ -17,7 +17,7 @@ class User extends Authenticatable
         return $this->firebase_token;
  
         // Return array of tokens or topics
-        return [$this->email_address => $this->name];
+        return $this->notificationTokens->pluck('token');
     }
 }
 ```
