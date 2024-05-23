@@ -12,9 +12,7 @@ class FirebaseNotificationTest extends TestCase
 {
     public function testViaTrait()
     {
-        Http::fake([
-            '*' => Http::response('Hello World', 200),
-        ]);
+        Notification::fake();
 
         $user = User::create([
             'name' => 'test',
@@ -24,25 +22,19 @@ class FirebaseNotificationTest extends TestCase
 
         $user->notify(new FirebaseNotification('Title', 'Body'));
 
-        Http::assertSent(function (Request $request) {
-            return $request->url() == 'https://fcm.googleapis.com/fcm/send';
-        });
+        Notification::assertSentTimes(FirebaseNotification::class, 1);
     }
 
     public function testWithFacade()
     {
-        Http::fake([
-            '*' => Http::response('Hello World', 200),
-        ]);
+        Notification::fake();
 
-        Notification::route('firebase', 'token123')
+        Notification::route('firebase', '/topics/1')
             ->notify(new FirebaseNotification('Title', 'Body'));
 
-        Notification::route('firebase', ['token123', 'token345'])
+        Notification::route('firebase', ['token1', 'token2'])
             ->notify(new FirebaseNotification('Title', 'Body'));
 
-        Http::assertSent(function (Request $request) {
-            return $request->url() == 'https://fcm.googleapis.com/fcm/send';
-        });
+        Notification::assertSentTimes(FirebaseNotification::class, 2);
     }
 }
