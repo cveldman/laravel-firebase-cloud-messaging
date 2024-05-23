@@ -40,3 +40,7 @@ Notification::route('firebase', '/topics/news')
 ### Progress
 
 - Event for invalid registration tokens
+
+[Google SDK](https://github.com/googleapis/google-api-php-client)
+
+[Cleaning up unused Google services](https://github.com/googleapis/google-api-php-client/tree/main?tab=readme-ov-file#cleaning-up-unused-services)
