@@ -21,9 +21,14 @@ class FirebaseChannel
         $client->addScope(FirebaseCloudMessaging::FIREBASE_MESSAGING);
         $service = new FirebaseCloudMessaging($client);
 
+        $tokens = $this->getDeviceTokens($route);
+        if(count($tokens) < 1) {
+            return;
+        }
+        
         $data = [
             'message' => [
-                'token' => $this->getDeviceTokens($route)[0],
+                'token' => $tokens[0],
                 'notification' => $data
             ]
         ];
